@@ -8,7 +8,7 @@ import (
 )
 
 func OrderRoutes(routeGroup *gin.RouterGroup) {
-	orderService := services.NewOrderService()
+	orderService := services.NewOrderServiceImpl()
 	orderController := controllers.NewOrderController(orderService)
 
 	orderRoute := routeGroup.Group("/orders")

@@ -5,17 +5,17 @@ import (
 	"ticket-api/order/internal/dto"
 )
 
-type orderService interface {
+type OrderService interface {
 	Create(data *dto.OrderCreateDto)
 }
 
-type orderServiceImpl struct {
+type OrderServiceImpl struct {
 }
 
-func NewOrderService() orderService {
-	return &orderServiceImpl{}
+func NewOrderServiceImpl() OrderService {
+	return &OrderServiceImpl{}
 }
 
-func (s *orderServiceImpl) Create(data *dto.OrderCreateDto) {
+func (s *OrderServiceImpl) Create(data *dto.OrderCreateDto) {
 	fmt.Printf("create order with amount: %d, and total amount: %d", data.Amount, data.TotalAnount)
 }

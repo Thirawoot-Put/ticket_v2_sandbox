@@ -1,0 +1,12 @@
+services:
+  
+  db:
+    container_name: ticket_order_db
+    image: postgres
+    restart: always
+    environment: 
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: ticket_order
+    ports:
+      - "25432:5432"

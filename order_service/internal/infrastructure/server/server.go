@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"ticket-api/order/internal/config"
+	"ticket-api/order/internal/infrastructure/database"
 	"ticket-api/order/internal/infrastructure/server/routes"
 
 	"github.com/gin-gonic/gin"
@@ -23,6 +24,8 @@ func AppServer() *Server {
 func (s *Server) Start() {
 	// connect database
 	config := config.LoadConfig()
+
+	database.Connect(config)
 
 	addr := fmt.Sprintf(":%s", config.Port)
 

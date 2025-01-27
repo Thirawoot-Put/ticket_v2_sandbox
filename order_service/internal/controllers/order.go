@@ -8,15 +8,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type OrderConbtroller struct {
-	service *services.OrderService
+type OrderController interface {
+	Post(c *gin.Context)
+	Get()
 }
 
-func NewOrderController(service *services.OrderService) *OrderConbtroller {
-	return &OrderConbtroller{service: service}
+type OrderConbtrollerImpl struct {
+	service services.OrderService
 }
 
-func (h *OrderConbtroller) Post(c *gin.Context) {
+func NewOrderController(service services.OrderService) OrderController {
+	return &OrderConbtrollerImpl{service: service}
+}
+
+func (h *OrderConbtrollerImpl) Post(c *gin.Context) {
 	var order dto.OrderCreateDto
 	if err := c.ShouldBindJSON(&order); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
@@ -24,5 +29,7 @@ func (h *OrderConbtroller) Post(c *gin.Context) {
 	}
 
 	h.service.Create(&order)
-	c.JSON(http.StatusBadRequest, gin.H{"success": "Create order success"})
+	c.JSON(http.StatusCreated, gin.H{"success": "Create order success"})
 }
+
+func (h *OrderConbtrollerImpl) Get() {}
