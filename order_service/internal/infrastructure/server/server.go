@@ -2,7 +2,7 @@ package server
 
 import (
 	"fmt"
-	"os"
+	"ticket-api/order/internal/config"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,10 +21,9 @@ func AppServer() *Server {
 
 func (s *Server) Start() {
 	// connect database
+	config := config.LoadConfig()
 
-	port := os.Getenv("PORT")
-
-	addr := fmt.Sprintf(":%s", port)
+	addr := fmt.Sprintf(":%s", config.Port)
 	s.HttpListen(addr)
 }
 
