@@ -1,3 +1,3 @@
-module konticket-api/order
+module ticket-api/order
 
 go 1.22.5
