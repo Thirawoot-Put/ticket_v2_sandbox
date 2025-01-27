@@ -1,4 +1,4 @@
-package handlers
+package controllers
 
 import (
 	"net/http"
@@ -8,21 +8,21 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type OrderHandler struct {
+type OrderConbtroller struct {
 	service *services.OrderService
 }
 
-func NewOrderHandler(service *services.OrderService) *OrderHandler {
-	return &OrderHandler{service: service}
+func NewOrderController(service *services.OrderService) *OrderConbtroller {
+	return &OrderConbtroller{service: service}
 }
 
-func (h *OrderHandler) Post(c *gin.Context) {
+func (h *OrderConbtroller) Post(c *gin.Context) {
 	var order dto.OrderCreateDto
 	if err := c.ShouldBindJSON(&order); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
 		return
 	}
 
-	h.service.CreateOrder(&order)
+	h.service.Create(&order)
 	c.JSON(http.StatusBadRequest, gin.H{"success": "Create order success"})
 }

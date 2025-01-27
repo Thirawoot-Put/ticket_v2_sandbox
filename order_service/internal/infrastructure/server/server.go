@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"ticket-api/order/internal/config"
+	"ticket-api/order/internal/infrastructure/server/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +25,10 @@ func (s *Server) Start() {
 	config := config.LoadConfig()
 
 	addr := fmt.Sprintf(":%s", config.Port)
+
+	router := s.app.Group("/api/v1")
+	routes.OrderRoutes(router)
+
 	s.HttpListen(addr)
 }
 
@@ -32,4 +37,8 @@ func (s *Server) HttpListen(addr string) {
 	if err != nil {
 		panic("Failed to start app server")
 	}
+}
+
+func AddRoute(routeGroup *gin.RouterGroup) {
+	routes.OrderRoutes(routeGroup)
 }
