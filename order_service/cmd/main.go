@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"ticket-api/order/internal/infrastructure/server"
+)
 
 func main() {
-	fmt.Println("hello, this is order service sandbox")
+	app := server.AppServer()
+
+	port := "9999"
+
+	app.Start(port)
 }
