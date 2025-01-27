@@ -8,8 +8,10 @@ import (
 )
 
 type Config struct {
-	AppEnv string
-	Port   string
+	PREFIX  string
+	VERSION string
+	AppEnv  string
+	Port    string
 }
 
 func LoadConfig() *Config {
@@ -24,7 +26,9 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		AppEnv: os.Getenv("APP_ENV"),
-		Port:   os.Getenv("PORT"),
+		AppEnv:  os.Getenv("APP_ENV"),
+		Port:    os.Getenv("PORT"),
+		PREFIX:  os.Getenv("PREFIX"),
+		VERSION: os.Getenv("VERSION"),
 	}
 }

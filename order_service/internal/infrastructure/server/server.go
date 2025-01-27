@@ -26,7 +26,8 @@ func (s *Server) Start() {
 
 	addr := fmt.Sprintf(":%s", config.Port)
 
-	router := s.app.Group("/api/v1")
+	url := fmt.Sprintf("/%s/%s", config.PREFIX, config.VERSION)
+	router := s.app.Group(url)
 	routes.OrderRoutes(router)
 
 	s.HttpListen(addr)
