@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,8 +19,10 @@ func AppServer() *Server {
 	}
 }
 
-func (s *Server) Start(port string) {
+func (s *Server) Start() {
 	// connect database
+
+	port := os.Getenv("PORT")
 
 	addr := fmt.Sprintf(":%s", port)
 	s.HttpListen(addr)
