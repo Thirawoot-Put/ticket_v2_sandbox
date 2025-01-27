@@ -12,6 +12,6 @@ func NewOrderService() *OrderService {
 	return &OrderService{}
 }
 
-func (s *OrderService) CreateOrder(data dto.OrderCreateDto) {
+func (s *OrderService) CreateOrder(data *dto.OrderCreateDto) {
 	fmt.Println("create order with amount: %d, and total amount: %d", data.Amount, data.TotalAnount)
 }
