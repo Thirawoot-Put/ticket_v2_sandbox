@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseConfig } from './config/database.config';
 import { UsersController } from './modules/users/infrastructure/controllers/users.controller';
+import { UsersModule } from './modules/users/users.module';
 
 const ENV = process.env.NODE_ENV || 'local';
 
@@ -15,17 +16,8 @@ const ENV = process.env.NODE_ENV || 'local';
       envFilePath: `env/.${ENV}.env`,
       isGlobal: true,
     }),
-    //TypeOrmModule.forRoot({
-    //  type: 'postgres',
-    //  host: 'localhost',
-    //  port: 25433,
-    //  username: 'admin',
-    //  password: '1234',
-    //  database: 'ticket_user',
-    //  entities: [],
-    //  synchronize: true,
-    //}),
     TypeOrmModule.forRootAsync(databaseConfig),
+    UsersModule,
   ],
   controllers: [AppController, UsersController],
   providers: [AppService],
