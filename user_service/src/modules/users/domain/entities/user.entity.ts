@@ -1,12 +1,12 @@
 export class UserCreateEntity {
-  name: string;
+  name: string | null;
   email: string;
   password: string;
 }
 
 export class UserEntity {
   id: number;
-  name: string;
+  name: string | null;
   email: string;
   password: string;
 }
