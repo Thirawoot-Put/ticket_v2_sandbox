@@ -13,6 +13,6 @@ export const databaseConfig = {
     database: configService.get<string>('DB_NAME'),
     entities: [],
     synchronize:
-      configService.get<string>('DB_NAME') === 'production' ? false : true,
+      configService.get<string>('NODE_ENV') === 'production' ? false : true,
   }),
 };
