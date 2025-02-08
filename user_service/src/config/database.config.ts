@@ -1,5 +1,6 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { UserModel } from 'src/modules/users/domain/models/user.model';
 
 export const databaseConfig = {
   imports: [ConfigModule],
@@ -11,8 +12,7 @@ export const databaseConfig = {
     username: configService.get<string>('DB_USER'),
     password: configService.get<string>('DB_PASSWORD'),
     database: configService.get<string>('DB_NAME'),
-    entities: [],
-    synchronize:
-      configService.get<string>('NODE_ENV') === 'production' ? false : true,
+    entities: [UserModel],
+    synchronize: true,
   }),
 };
