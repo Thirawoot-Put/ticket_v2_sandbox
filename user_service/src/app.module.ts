@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseConfig } from './config/database.config';
+import { UsersController } from './modules/users/infrastructure/controllers/users.controller';
 
 const ENV = process.env.NODE_ENV || 'local';
 
@@ -26,7 +27,7 @@ const ENV = process.env.NODE_ENV || 'local';
     //}),
     TypeOrmModule.forRootAsync(databaseConfig),
   ],
-  controllers: [AppController],
+  controllers: [AppController, UsersController],
   providers: [AppService],
 })
 export class AppModule {}
