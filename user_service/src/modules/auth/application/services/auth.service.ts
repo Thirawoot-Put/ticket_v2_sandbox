@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotAcceptableException } from '@nestjs/common';
 import { AuthService } from '../ports/in/auth.port-in';
 import { AuthLogin, AuthRegister, AuthResponse } from '../../dto/auth.dto';
 import { UsersService } from 'src/modules/users/application/ports/in/user.port-in';
@@ -25,9 +25,17 @@ export class AuthServiceImpl implements AuthService {
   }
 
   async login(data: AuthLogin): Promise<AuthResponse> {
-    console.log(data);
-    // 'find user by user service';
+    const user = await this.userService.findByEmail(data.email);
+    const match = await this.bcryptService.checkPwd(
+      data.password,
+      user.password,
+    );
+    if (!match) {
+      throw new NotAcceptableException();
+    }
 
-    return { accessToken: 'hello login' };
+    const payload = { sub: user.id, email: user.email };
+
+    return { accessToken: this.jwtService.sign(payload) };
   }
 }

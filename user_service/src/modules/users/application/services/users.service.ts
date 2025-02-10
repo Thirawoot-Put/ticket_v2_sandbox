@@ -1,5 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { UserCreateDto, UserReponseDto } from '../../dto/user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  UserCreateDto,
+  UserReponseDto,
+  UserResponseWithPwd,
+} from '../../dto/user.dto';
 import { UserCreateEntity } from '../../domain/entities/user.entity';
 import { UsersService } from '../ports/in/user.port-in';
 import { UserRepository } from '../ports/out/user.port-out';
@@ -19,5 +23,12 @@ export class UsersServiceImpl extends UsersService {
     const newUser = await this.userRepository.create(user);
 
     return { id: newUser.id, name: newUser.name, email: newUser.email };
+  }
+
+  async findByEmail(email: string): Promise<UserResponseWithPwd> {
+    const user = await this.userRepository.findByEmail(email);
+    if (!user) throw new NotFoundException();
+
+    return user;
   }
 }

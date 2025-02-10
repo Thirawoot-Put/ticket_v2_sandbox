@@ -16,3 +16,8 @@ export class UserReponseDto extends UserBaseDto {
   id: number;
   name: string | null;
 }
+
+export class UserResponseWithPwd extends UserReponseDto {
+  @IsNotEmpty()
+  password: string;
+}

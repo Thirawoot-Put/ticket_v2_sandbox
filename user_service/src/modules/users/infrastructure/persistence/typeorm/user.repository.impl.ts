@@ -20,4 +20,8 @@ export class UserRepositoryImpl extends UserRepository {
   async create(data: UserCreateEntity): Promise<UserEntity> {
     return this.userRepository.save(data);
   }
+
+  async findByEmail(email: string): Promise<UserEntity | null> {
+    return await this.userRepository.findOne({ where: { email: email } });
+  }
 }

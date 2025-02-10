@@ -5,4 +5,5 @@ import {
 
 export abstract class UserRepository {
   abstract create(data: UserCreateEntity): Promise<UserEntity>;
+  abstract findByEmail(email: string): Promise<UserEntity | null>;
 }
