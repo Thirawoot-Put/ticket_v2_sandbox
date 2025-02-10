@@ -8,4 +8,5 @@ import {
 export abstract class UsersService {
   abstract create(data: UserCreateDto): Promise<UserReponseDto>;
   abstract findByEmail(email: string): Promise<UserResponseWithPwd>;
+  abstract findById(id: number): Promise<UserReponseDto>;
 }

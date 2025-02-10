@@ -31,4 +31,11 @@ export class UsersServiceImpl extends UsersService {
 
     return user;
   }
+
+  async findById(id: number): Promise<UserReponseDto> {
+    const user = await this.userRepository.findById(id);
+    if (!user) throw new NotFoundException('USER_NOT_FOUND');
+
+    return { id: user.id, email: user.email, name: user.name };
+  }
 }

@@ -7,6 +7,7 @@ import {
 } from 'src/modules/users/domain/entities/user.entity';
 import { UserModel } from 'src/modules/users/domain/models/user.model';
 import { UserRepository } from 'src/modules/users/application/ports/out/user.port-out';
+import { UserReponseDto } from 'src/modules/users/dto/user.dto';
 
 @Injectable()
 export class UserRepositoryImpl extends UserRepository {
@@ -23,5 +24,9 @@ export class UserRepositoryImpl extends UserRepository {
 
   async findByEmail(email: string): Promise<UserEntity | null> {
     return await this.userRepository.findOne({ where: { email: email } });
+  }
+
+  async findById(id: number): Promise<UserReponseDto | null> {
+    return await this.userRepository.findOne({ where: { id: id } });
   }
 }
