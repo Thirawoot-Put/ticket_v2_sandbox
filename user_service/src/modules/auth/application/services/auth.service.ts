@@ -1,24 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { AuthService } from '../ports/in/auth.port-in';
+import { AuthResponseDto } from '../../dto/auth.dto';
+import { UserCreateDto } from 'src/modules/users/dto/user.dto';
 
 @Injectable()
-export class AuthService {
-  create() {
-    return 'This action adds a new auth';
-  }
-
-  findAll() {
-    return `This action returns all auth`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update() {
-    return `This action updates a # auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+export class AuthServiceImpl implements AuthService {
+  async register(data: UserCreateDto): Promise<AuthResponseDto> {
+    console.log(data);
+    return { accessToken: 'hello token' };
   }
 }
