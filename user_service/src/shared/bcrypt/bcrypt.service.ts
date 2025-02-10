@@ -7,7 +7,8 @@ export class BcryptService {
   constructor(private readonly configService: ConfigService) { }
 
   async hashPwd(pwd: string) {
-    return await bcrypt.hash(pwd, this.configService.get<string>('SALT'));
+    const saltOrRound = this.configService.get<string>('SALTORROUND');
+    return await bcrypt.hash(pwd, parseInt(saltOrRound));
   }
 
   async checkPwd(pwd: string, hash: string) {
