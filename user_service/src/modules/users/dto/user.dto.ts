@@ -3,7 +3,6 @@ class UserBaseDto {
 }
 
 export class UserCreateDto extends UserBaseDto {
-  id: number;
   name?: string;
   password: string;
 }
