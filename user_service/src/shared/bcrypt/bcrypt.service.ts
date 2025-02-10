@@ -6,9 +6,13 @@ import * as bcrypt from 'bcrypt';
 export class BcryptService {
   constructor(private readonly configService: ConfigService) { }
 
+  private async _genSalt() {
+    const round = this.configService.get<string>('ROUND');
+    return await bcrypt.genSalt(parseInt(round));
+  }
+
   async hashPwd(pwd: string) {
-    const saltOrRound = this.configService.get<string>('SALTORROUND');
-    return await bcrypt.hash(pwd, parseInt(saltOrRound));
+    return await bcrypt.hash(pwd, await this._genSalt());
   }
 
   async checkPwd(pwd: string, hash: string) {

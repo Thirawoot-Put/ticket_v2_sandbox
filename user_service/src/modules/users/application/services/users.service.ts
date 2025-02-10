@@ -27,7 +27,7 @@ export class UsersServiceImpl extends UsersService {
 
   async findByEmail(email: string): Promise<UserResponseWithPwd> {
     const user = await this.userRepository.findByEmail(email);
-    if (!user) throw new NotFoundException();
+    if (!user) throw new NotFoundException('INVALID_EMAIL');
 
     return user;
   }

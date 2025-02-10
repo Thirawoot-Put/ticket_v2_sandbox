@@ -1,4 +1,4 @@
-import { Injectable, NotAcceptableException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AuthService } from '../ports/in/auth.port-in';
 import { AuthLogin, AuthRegister, AuthResponse } from '../../dto/auth.dto';
 import { UsersService } from 'src/modules/users/application/ports/in/user.port-in';
@@ -31,7 +31,7 @@ export class AuthServiceImpl implements AuthService {
       user.password,
     );
     if (!match) {
-      throw new NotAcceptableException();
+      throw new BadRequestException('INVALID_PASSWORD');
     }
 
     const payload = { sub: user.id, email: user.email };
