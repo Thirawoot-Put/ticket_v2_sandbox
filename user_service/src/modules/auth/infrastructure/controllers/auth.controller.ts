@@ -3,17 +3,22 @@ import {
   AUTH_SERVICE,
   AuthService,
 } from '../../application/ports/in/auth.port-in';
-import { UserCreateDto } from 'src/modules/users/dto/user.dto';
+import { AuthLogin, AuthRegister } from '../../dto/auth.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject(AUTH_SERVICE) private readonly authService: AuthService,
-  ) {}
+  ) { }
 
   @Post('register')
-  create(@Body() user: UserCreateDto) {
+  register(@Body() user: AuthRegister) {
     return this.authService.register(user);
+  }
+
+  @Post('login')
+  login(@Body() data: AuthLogin) {
+    return this.authService.login(data);
   }
 
   //@Get()
