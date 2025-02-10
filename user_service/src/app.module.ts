@@ -23,4 +23,4 @@ const ENV = process.env.NODE_ENV || 'local';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
