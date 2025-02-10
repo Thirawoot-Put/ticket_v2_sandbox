@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AuthService } from '../ports/in/auth.port-in';
-import { AuthResponseDto } from '../../dto/auth.dto';
-import { UserCreateDto } from 'src/modules/users/dto/user.dto';
+import { AuthRegister, AuthResponse } from '../../dto/auth.dto';
 import { UsersService } from 'src/modules/users/application/ports/in/user.port-in';
 import { JwtService } from '@nestjs/jwt';
 
@@ -12,7 +11,7 @@ export class AuthServiceImpl implements AuthService {
     private readonly jwtService: JwtService,
   ) { }
 
-  async register(data: UserCreateDto): Promise<AuthResponseDto> {
+  async register(data: AuthRegister): Promise<AuthResponse> {
     const newUser = await this.userService.create(data);
     const payload = { sub: newUser.id, email: newUser.email };
 
