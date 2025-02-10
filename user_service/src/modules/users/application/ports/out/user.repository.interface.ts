@@ -3,6 +3,6 @@ import {
   UserEntity,
 } from '../../../domain/entities/user.entity';
 
-export interface UserRepository {
-  create(data: UserCreateEntity): Promise<UserEntity>;
+export abstract class UserRepository {
+  abstract create(data: UserCreateEntity): Promise<UserEntity>;
 }

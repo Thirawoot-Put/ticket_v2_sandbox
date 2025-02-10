@@ -5,8 +5,10 @@ import { UserCreateDto, UserReponseDto } from '../../dto/user.dto';
 import { UserCreateEntity } from '../../domain/entities/user.entity';
 
 @Injectable()
-export class UsersServiceImpl implements UsersService {
-  constructor(private readonly userRepository: UserRepository) {}
+export class UsersServiceImpl extends UsersService {
+  constructor(private readonly userRepository: UserRepository) {
+    super();
+  }
 
   async create(data: UserCreateDto): Promise<UserReponseDto> {
     const user = new UserCreateEntity();
@@ -19,4 +21,3 @@ export class UsersServiceImpl implements UsersService {
     return { id: newUser.id, name: newUser.name, email: newUser.email };
   }
 }
-

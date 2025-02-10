@@ -9,11 +9,13 @@ import {
 import { UserModel } from 'src/modules/users/domain/models/user.model';
 
 @Injectable()
-export class UserRepositoryImpl implements UserRepository {
+export class UserRepositoryImpl extends UserRepository {
   constructor(
     @InjectRepository(UserModel)
     private readonly userRepository: Repository<UserModel>,
-  ) {}
+  ) {
+    super();
+  }
 
   async create(data: UserCreateEntity): Promise<UserEntity> {
     return this.userRepository.save(data);
