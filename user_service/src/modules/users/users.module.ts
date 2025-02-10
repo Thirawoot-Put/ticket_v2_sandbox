@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UsersController } from './infrastructure/controllers/users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModel } from './domain/models/user.model';
@@ -6,9 +6,13 @@ import { UserRepositoryImpl } from './infrastructure/persistence/typeorm/user.re
 import { UsersServiceImpl } from './application/services/users.service';
 import { UsersService } from './application/ports/in/user.port-in';
 import { UserRepository } from './application/ports/out/user.port-out';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserModel])],
+  imports: [
+    TypeOrmModule.forFeature([UserModel]),
+    forwardRef(() => AuthModule),
+  ],
   controllers: [UsersController],
   providers: [
     { provide: UsersService, useClass: UsersServiceImpl },
@@ -16,4 +20,4 @@ import { UserRepository } from './application/ports/out/user.port-out';
   ],
   exports: [UsersService],
 })
-export class UsersModule {}
+export class UsersModule { }
