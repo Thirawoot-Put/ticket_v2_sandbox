@@ -10,7 +10,7 @@ export class AuthServiceImpl implements AuthService {
   constructor(
     private readonly userService: UsersService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async register(data: UserCreateDto): Promise<AuthResponseDto> {
     const newUser = await this.userService.create(data);
