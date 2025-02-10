@@ -11,7 +11,7 @@ export class AuthController {
     @Inject(AUTH_SERVICE) private readonly authService: AuthService,
   ) {}
 
-  @Post()
+  @Post('register')
   create(@Body() user: UserCreateDto) {
     return this.authService.register(user);
   }

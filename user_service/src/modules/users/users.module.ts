@@ -14,5 +14,6 @@ import { UserRepository } from './application/ports/out/user.port-out';
     { provide: UsersService, useClass: UsersServiceImpl },
     { provide: UserRepository, useClass: UserRepositoryImpl },
   ],
+  exports: [UsersService],
 })
 export class UsersModule {}
