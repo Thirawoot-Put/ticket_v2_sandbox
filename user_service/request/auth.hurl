@@ -1,8 +1,8 @@
 POST http://{{base_url}}/auth/register
 
 {
-  "email": "test10@mail.com",
-  "name":"test 10",
+  "email": "test11@mail.com",
+  "name":"test 11",
   "password": "1234"
 }
 
