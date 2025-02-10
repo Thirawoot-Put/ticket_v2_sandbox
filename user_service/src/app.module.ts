@@ -8,6 +8,8 @@ import { databaseConfig } from './config/database.config';
 import { UsersController } from './modules/users/infrastructure/controllers/users.controller';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { UsersServiceImpl } from './modules/users/application/services/users.service';
+//import { AuthServiceImpl } from './modules/auth/application/services/auth.service';
 
 const ENV = process.env.NODE_ENV || 'local';
 
@@ -22,6 +24,6 @@ const ENV = process.env.NODE_ENV || 'local';
     AuthModule,
   ],
   controllers: [AppController, UsersController],
-  providers: [AppService],
+  providers: [AppService, UsersServiceImpl],
 })
 export class AppModule {}
