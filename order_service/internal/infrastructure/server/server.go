@@ -22,7 +22,6 @@ func AppServer() *Server {
 }
 
 func (s *Server) Start() {
-	// connect database
 	config := config.LoadConfig()
 
 	database.Connect(config)
